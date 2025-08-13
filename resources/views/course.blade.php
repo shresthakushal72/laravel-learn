@@ -2,7 +2,7 @@
 
     <section class="py-10">
         <h1 class="text-center text-2xl font-semibold mb-5">Courses</h1>
-        <div class="container mx-auto max-w-4xl">
+        <div class="container mx-auto">
             <form action="/save-cource" method="post" enctype="multipart/form-data"
                 class="bg-white shadow-2xl rounded-lg p-8">
                 @csrf
@@ -10,13 +10,15 @@
                     <div>
                         <label for="name" class="block font-medium">Enter Course Name <span class="text-red-600">*</span></label>
                         <input type="text" name="name" id="name"
-                            class="w-full mt-2 p-2 rounded border border-gray-300 bg-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none" />
+                            class="w-full mt-2 p-2 rounded border border-gray-300 bg-gray-100 focus:border-blue-500 focus:ring 
+                            focus:ring-blue-200 focus:outline-none" required/>
                     </div>
 
                     <div>
                         <label for="price" class="block font-medium">Enter Course Price <span class="text-red-600">*</span></label>
                         <input type="text" name="price" id="price"
-                            class="w-full mt-2 p-2 rounded border border-gray-300 bg-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none" />
+                            class="w-full mt-2 p-2 rounded border border-gray-300 bg-gray-100 focus:border-blue-500 focus:ring 
+                            focus:ring-blue-200 focus:outline-none" required/>
                     </div>
 
                     <div>
@@ -36,10 +38,10 @@
                     <button type="submit"
                         class="py-2 px-6 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring focus:ring-blue-200">
                         Submit
-                    </button>
+                </button>
                 </div>
             </form>
         </div>
     </section>
-    
+
 </x-frontend-layout>

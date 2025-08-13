@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Yaml\Yaml;
 
 Route::get('/', function () {
     return view('homepage');
@@ -17,5 +19,22 @@ Route::get('/courses', function () {
 });
 
 Route::post('/save-cource', function (Request $request) {
-    return $request;
+
+
+    // form form request to model database
+
+    $course = new Course();
+    $course->name = $request->name;
+    $course->price = $request->price;
+    $course->duration = $request->duration;
+    // image string saving
+    if ($request->hasFile('image')) {
+       $file = $request->file('image');
+       $filename = time() .'.'. $file->getClientOriginalName();
+       $file->move(('images'), $filename);
+       $course->image = 'images/'.$filename;
+    } 
+    $course->save();
+
+    return 'Course saved successfully!';
 });

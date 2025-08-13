@@ -5,7 +5,7 @@
     @vite('resources/css/app.css')
     <style>
         .container {
-            width: 85%;
+            width: 90%;
             margin: auto;
             
         }
