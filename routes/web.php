@@ -1,12 +1,21 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
 });
 
 
-Route::get('/home', function () {
-    return view('home');
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/courses', function () {
+    return view('course');
+});
+
+Route::post('/save-cource', function (Request $request) {
+    return $request;
 });
