@@ -54,6 +54,9 @@
                         <th class="py-3 px-6 text-left">Price</th>
                         <th class="py-3 px-6 text-left">Duration</th>
                         <th class="py-3 px-6 text-left">Image</th>
+                        <th class="py-3 px-6 text-left">Edit</th>
+                        <th class="py-3 px-6 text-left">Delete</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -64,11 +67,24 @@
                             <td class="py-4 px-6">{{ $course->duration }} days</td>
                             <td class="py-4 px-6">
                                 @if ($course->image)
-                                    <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
+                                    <img src="{{ asset($course->image) }}" alt="{{ $course->name }}"
                                         class="w-16 h-auto rounded">
                                 @else
                                     No Image
                                 @endif
+                            </td>
+                            <td class="py-4 px-6">
+                               <form action="/course/{{$course->id}}/update" method="post" class="text-blue-500 hover:text-blue-700">
+                            @csrf
+                            @method('update')
+                            Edit
+                            </form>
+                            </td>
+                            <td class="py-4 px-6">
+                                <form action="/delete-course/{{ $course->id }}" method="post" class="text-blue-500 hover:text-blue-700"><button>Delete</button>
+                                @csrf
+                                @method('delete')
+                                </form>   
                             </td>
                         </tr>
                     @endforeach

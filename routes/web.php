@@ -39,7 +39,35 @@ Route::post('/save-cource', function (Request $request) {
     } 
     $course->save();
 
-    return redirect('/courses')->with('success', 'Course saved successfully!');
+    return redirect('/courses/')->with('success', 'Course saved successfully!');
+});
+
+Route::post('/courses/{id}/update', function (Request $request, $id) {
+    $course = Course::findOrFail($id);
+    $course->name = $request->name;
+    $course->price = $request->price;
+    $course->duration = $request->duration;
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $filename = time() . '.' . $file->getClientOriginalName();
+        $file->move(('images'), $filename);
+        $course->image = 'images/' . $filename;
+    }
+    $course->save();
+    return redirect('/courses')->with('success', 'Course updated successfully!');
+});
+
+// Route to delete a course
+// This route will handle the deletion of a course by its ID
+// It uses the Course model to find the course and delete it from the database.
+// The route expects a DELETE request with the course ID in the URL.
+// It returns the course object before deletion for confirmation purposes.
+
+
+Route::delete('/delete-course/{id}', function($id){
+    $course = Course::findOrFail($id);
+    $course->delete();
+    return redirect('/courses');
 });
 
 
@@ -49,7 +77,7 @@ Route::get('/demo', function () {
     return view('demo');
 });
 
-Route::post('demo-save', function(Request $request) {
+Route::post('/demo-save', function(Request $request) {
     $demo = new demo();
     $demo->name = $request->name;
     $demo->price = $request->price;
