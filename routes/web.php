@@ -42,21 +42,29 @@ Route::post('/save-cource', function (Request $request) {
     return redirect('/courses/')->with('success', 'Course saved successfully!');
 });
 
-Route::post('/courses/{id}/update', function (Request $request, $id) {
+Route::put('/edit-course/{id}', function ($id) {
+    // Find the course by ID
+    $course = Course::findOrFail($id);
+    return view('update-courses', compact('course'));
+});
+
+
+Route::put('/update-course/{id}', function (Request $request, $id) {
     $course = Course::findOrFail($id);
     $course->name = $request->name;
     $course->price = $request->price;
     $course->duration = $request->duration;
+
     if ($request->hasFile('image')) {
         $file = $request->file('image');
         $filename = time() . '.' . $file->getClientOriginalName();
         $file->move(('images'), $filename);
         $course->image = 'images/' . $filename;
     }
+
     $course->save();
     return redirect('/courses')->with('success', 'Course updated successfully!');
 });
-
 // Route to delete a course
 // This route will handle the deletion of a course by its ID
 // It uses the Course model to find the course and delete it from the database.

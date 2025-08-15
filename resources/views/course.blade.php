@@ -74,10 +74,10 @@
                                 @endif
                             </td>
                             <td class="py-4 px-6">
-                               <form action="/course/{{$course->id}}/update" method="post" class="text-blue-500 hover:text-blue-700">
+                               <form action="/edit-course/{{$course->id}}" method="post" class="text-blue-500 hover:text-blue-700">
                             @csrf
-                            @method('update')
-                            Edit
+                            @method('put')
+                            <button>Edit</button>
                             </form>
                             </td>
                             <td class="py-4 px-6">
