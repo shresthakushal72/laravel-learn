@@ -48,7 +48,12 @@ Route::put('/edit-course/{id}', function ($id) {
     return view('update-courses', compact('course'));
 });
 
-
+// Route to update a course
+// This route will handle the update of a course by its ID
+// It uses the Course model to find the course and update its details.
+// The route expects a PUT request with the course ID in the URL.
+// It also handles file uploads for the course image.
+// After updating, it redirects to the courses page with a success message.
 Route::put('/update-course/{id}', function (Request $request, $id) {
     $course = Course::findOrFail($id);
     $course->name = $request->name;
