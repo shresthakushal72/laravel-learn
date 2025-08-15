@@ -16,7 +16,9 @@ Route::get('/about', function () {
 });
 
 Route::get('/courses', function () {
-    return view('course');
+    $courses = Course::all();
+    // Pass the courses to the view
+    return view('course', compact('courses'));
 });
 
 Route::post('/save-cource', function (Request $request) {
@@ -37,8 +39,11 @@ Route::post('/save-cource', function (Request $request) {
     } 
     $course->save();
 
-    return 'Course saved successfully!';
+    return redirect('/courses')->with('success', 'Course saved successfully!');
 });
+
+
+
 
 Route::get('/demo', function () {
     return view('demo');

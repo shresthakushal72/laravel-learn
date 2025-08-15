@@ -44,4 +44,36 @@
         </div>
     </section>
 
+    <section class="py-10">
+        <div class="container mx-auto">
+            <h2 class="text-xl font-semibold mb-5">Course List</h2>
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-700">
+                        <th class="py-3 px-6 text-left">Course Name</th>
+                        <th class="py-3 px-6 text-left">Price</th>
+                        <th class="py-3 px-6 text-left">Duration</th>
+                        <th class="py-3 px-6 text-left">Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($courses as $course)
+                        <tr class="border-b hover:bg-gray-100">
+                            <td class="py-4 px-6">{{ $course->name }}</td>
+                            <td class="py-4 px-6">{{ $course->price }}</td>
+                            <td class="py-4 px-6">{{ $course->duration }} days</td>
+                            <td class="py-4 px-6">
+                                @if ($course->image)
+                                    <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
+                                        class="w-16 h-auto rounded">
+                                @else
+                                    No Image
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
 </x-frontend-layout>
