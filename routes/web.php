@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Course;
+use App\Models\demo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\Yaml\Yaml;
@@ -37,4 +38,18 @@ Route::post('/save-cource', function (Request $request) {
     $course->save();
 
     return 'Course saved successfully!';
+});
+
+Route::get('/demo', function () {
+    return view('demo');
+});
+
+Route::post('demo-save', function(Request $request) {
+    $demo = new demo();
+    $demo->name = $request->name;
+    $demo->price = $request->price;
+    $demo->duration = $request->duration;
+    // image string saving
+    $demo->save();
+    return 'Demo saved successfully!';
 });
